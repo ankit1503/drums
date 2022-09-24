@@ -6,11 +6,13 @@ for(i=0;i<numOfDrum;i++)
     {
        var buttonText=this.innerHTML;
        makeSound(buttonText);
+       pressKeyFun(buttonText);
     });
 }
 
 document.addEventListener("keydown",function(event){
     makeSound(event.key);
+    pressKeyFun(event.key);
 })
 function makeSound(key)
 {
@@ -38,7 +40,20 @@ function makeSound(key)
           case "l":
             audio =new Audio("sounds/kick-bass.mp3");
           break;
+          default:
+            audio =new Audio("sounds/kick-bass.mp3");
           
        }
        audio.play(); 
+}
+
+function pressKeyFun(key)
+{
+    var activeButton= document.querySelector("."+key);
+   
+    activeButton.classList.add("pressed");
+
+    setTimeout(function(){
+        activeButton.classList.remove("pressed");
+    },100);
 }
